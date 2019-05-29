@@ -8,7 +8,7 @@ public class draw : MonoBehaviour {
 
     public static Material lineMaterial;
     public List<Vector3> links, anylink;
-
+    public float radius = 0.0001f;
 
     Camera myCamera;
     public GameObject panel;
@@ -26,12 +26,26 @@ public class draw : MonoBehaviour {
         anylink = new List<Vector3>();
         for (int i = 0; i < panel.transform.childCount-1;i++){
             for (int j = i+1; j < panel.transform.childCount;j++){
-                anylink.Add(panel.transform.GetChild(i).position);
-                anylink.Add(panel.transform.GetChild(j).position);
+                Vector3 p1 = panel.transform.GetChild(i).position;
+                Vector3 p2 = panel.transform.GetChild(j).position;
+                Vector3 d12 = (p2 - p1) * radius / Vector3.Distance(p1, p2);
+
+                p1 +=d12 ;
+                p2 -=d12 ;
+
+                anylink.Add(p1);
+                anylink.Add(p2);
             
                 if(panel.transform.GetChild(i).GetComponent<force>().linked.Contains(panel.transform.GetChild(j))&&panel.transform.GetChild(i).GetComponent<dragpeople>().drawme==true){
-                    links.Add(panel.transform.GetChild(i).position);
-                    links.Add(panel.transform.GetChild(j).position);
+
+                    Vector3 p3 = panel.transform.GetChild(i).position;
+                    Vector3 p4 = panel.transform.GetChild(j).position;
+                    Vector3 d34 = (p4 - p3) * radius / Vector3.Distance(p4, p3);
+                    p3 += d34;
+                    p4 -= d34;
+
+                    links.Add(p3);
+                    links.Add(p4);
                 }
             }
         }

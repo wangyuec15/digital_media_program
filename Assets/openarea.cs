@@ -42,7 +42,7 @@ public class openarea : MonoBehaviour
     {
         Camera.main.GetComponent<main_controller>().show_district();
         title.text = "台湾中部地区";
-        info.text = "城市：台中市\n\n县城：彰化县 南投县 花莲县 澎湖县";
+        info.text = "城市：台中市\n\n县城：彰化县 南投县 花莲县 澎湖县 金门县 连江县";
 
         southpeople.SetActive(false);
         northpeople.SetActive(false);
